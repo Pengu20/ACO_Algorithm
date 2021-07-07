@@ -12,13 +12,14 @@
 class Route
 {
 public:
+    Route();
     Route(string input);
 
     vector<point> getInnerRoute();
     vector<point> getOuterRoute();
     bool onRoad(point object);
 
-
+    void testRandomVertices(vector<point> vertices);
 
 
 private:

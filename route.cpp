@@ -1,5 +1,8 @@
 #include "route.h"
 
+Route::Route(){
+
+}
 
 
 Route::Route(string input)
@@ -14,6 +17,13 @@ Route::Route(string input)
     cout << "Shortest tours has been created" << endl;
 
 
+}
+
+void Route::testRandomVertices(vector<point> vertices)
+{
+    _innerRoute = createShortestTour(vertices);
+
+    _outerRoute = _innerRoute;
 }
 
 vector<point> Route::getInnerRoute()

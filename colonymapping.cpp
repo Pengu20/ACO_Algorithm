@@ -42,11 +42,7 @@ vector<point> ColonyMapping::RunACO(int likeFactor, int pheromoneFactor)
         }
         vector<point> travel;
 
-        if(antAmount != antNumber-1){
             travel = anthony.chooseRoute(startPos, antRoute, pheromone,likeFactor);
-        }else{
-            travel = anthony.followPheromonetrail(startPos, antRoute, pheromone);
-        }
 
         antRoute.erase(std::remove(antRoute.begin(), antRoute.end(), travel[1]), antRoute.end());
         pheromoneMapping.setPheromone(travel[0], travel[1], anthony.feromoneRelease(travel, pheromoneFactor));

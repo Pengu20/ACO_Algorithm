@@ -16,13 +16,49 @@
 using namespace std;
 
 
+//Autogenere punkter
+vector<point> randVertices(int verticeAmount, int min, int max){
+
+
+    //et punkt må ikke befinde sig i origo!
+
+    //Lav string input om til tal datatyper fordelt ud i de to lister.
+
+    vector<point> inputVector;
+
+    for(int i = 0; i < verticeAmount-1; i++){
+
+        point input(rand() % (max-min) + min, rand() % (max-min) + min);
+
+        bool exists = false;
+        for(point j : inputVector){
+            if(input == j){
+                exists = true;
+            }
+        }
+
+        if(exists != true){
+            inputVector.push_back(input);
+            cout << "random vertices generated: " << inputVector.size() << endl;
+
+        }else{
+            i--;
+        }
+
+    }
+
+
+    return inputVector;
+
+}
+
+
 int main()
 {
     srand (static_cast <unsigned> (time(0)));
 
     //et punkt må ikke befinde sig i origo!
-    string input  =
-                    "(4,8) blue"
+    string input  = "(4,8) blue"
                     "(13,11) blue"
                     "(14,8) blue"
                     "(14,5) blue"
@@ -96,6 +132,17 @@ int main()
 
 
 
+    //Testning med tilfældige polynomier ("Udkommenter linjerne markeret med "Oprettelse af sorterings klasser" og set ObjectInMovement = false)
+
+//    Route collisionRoad;
+//    collisionRoad.testRandomVertices(randVertices(30,3,15));
+
+//    vector<point> InnerMap = collisionRoad.getInnerRoute();
+
+//    vector<point> OuterMap = collisionRoad.getInnerRoute();
+
+
+
     //Oprettelse af sorterings klasser
 
     Route collisionRoad(input);
@@ -107,6 +154,9 @@ int main()
 
 
     //Partikle Movement
+
+    bool ObjectInMovement = true;
+
     point objectMovement(rand() % 14, rand() % 14);
     int stepcount = 0;
     bool positiveMovementVertical = true;
@@ -194,8 +244,11 @@ int main()
             window.draw(point);
         }
 
+        if(ObjectInMovement){
+
 
         //Oprettelse af det bevægelige object i sfml vinduet
+
         point.setFillColor(sf::Color(255, 0, 0));
 
         point.setPosition(objectMovement.x()*MapScaling, objectMovement.y()*MapScaling);
@@ -238,7 +291,7 @@ int main()
             stepcount = 0;
         }
 
-
+       }
 
 
 
